@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+.App {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    background: #f0f3f4;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+}
+
+.App-title {
+    font-size: 1.5em;
+}
+
+.App-intro {
+    font-size: large;
+}
+
+nav {
+    background: #FF0050;
+    padding: 30px 0;
+    color: #ffffff;
+}
+
+nav h1 sup {
+    font-size: 12px;
+    position: absolute;
+    top: 7px;
+    right: -4px;
+    text-shadow: none;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+nav h1 span {
+    text-shadow: 3px 2px 0px rgba(0, 0, 0, 0.5);
+
+    font-weight: 400
+}
+
+nav h1 {
+    display: inline-block;
+    position: relative;
+    text-shadow: 3px 4px 0px #000;
+    letter-spacing: -2px;
+    font-weight: 700;
+}
+
+.templateName {
+    font-weight: 700;
+    color: #FF0050;
+    font-size: 20px;
+    text-transform: capitalize;
+
+}
+
+body .form-control:focus {
+    box-shadow: none;
+    border-color: #FF0050;
+}
+
+body .form-control {
+    width: 70px;
+    padding: 3px 10px;
+}
+
+body .form-group label {
+    font-size: 15px;
+}
+
+body .form-group {
+    float: left;
+
+}
+
+body .table {
+    margin: 0;
+}
+body .table td {
+    vertical-align: middle;
+}
+
+.mainLogo {
+    width: 40px;
+    position: absolute;
+    right: -50px;
+    top: 0;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*App Fade In Animation*/
+.App {
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
