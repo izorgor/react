@@ -1,0 +1,26 @@
+{
+  "de-20minuten.ch": [
+    {
+      "name": "blueButton",
+      "active": true,
+      "probability": "50"
+    },
+    {
+      "name": "greenButton",
+      "active": false,
+      "probability": 0
+    }
+  ],
+  "fr-bilan.ch": [
+    {
+      "name": "blueButton",
+      "active": false,
+      "probability": 0
+    },
+    {
+      "name": "greenButton",
+      "active": true,
+      "probability": "20"
+    }
+  ]
+}

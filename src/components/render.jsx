@@ -8,7 +8,7 @@ class Render extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({data: data});
-        this.setState({config: this.test()});
+        this.setState({config: this.handleInitialConfigState()});
       })
       .catch(err => console.error(this.props.url, err.toString()));
   }
@@ -22,39 +22,57 @@ class Render extends Component {
     this.loadData();
   }
 
-  test () {
+  handleInitialConfigState () {
+    var config = {};
+    {
+      this.state.data && this.state.data.templates.map((template, i) => {
+        config[template.name] = [];
 
-    var config = {
-      'de-20minuten.ch': [
         {
-          name: 'blueButton',
-          active: true,
-          probability: 1
-        },
-        {
-          name: 'default',
-          active: true,
-          probability: 1
+          template.layouts.map((t, i) => {
+            config[template.name][i] = {
+              name: t,
+              active: false,
+              probability: 0
+            };
+          });
         }
-      ]
-    };
+
+      });
+    }
     return config;
   }
 
+  handleChange = (e, inputConf) => {
+    const template = inputConf.template;
+    const layout = inputConf.layout;
+    const active = inputConf.active;
+
+    let config = this.state.config;
+
+    config[template].filter(c => c.name === layout)[0].probability = e.target.value;
+    config[template].filter(c => c.name === layout)[0].active = active;
+
+    this.setState({config});
+  };
+
   render () {
-    console.log(this.state);
-    const {data} = this.state;
+
+    const {data, config} = this.state;
 
     return (
-      <div className="table-responsive">
-        <table className="table table-striped">
-          <tbody>
-          {data && data.templates.map((template, i) => (
-            <Block key={i} template={template.name} variations={template.layouts}/>
-          ))}
-          </tbody>
-        </table>
-      </div>
+      <React.Fragment>
+        <div className="table-responsive">
+          <table className="table table-striped">
+            <tbody>
+            {data && data.templates.map((template, i) => (
+              <Block key={i} template={template.name} variations={template.layouts} onChange={this.handleChange}/>
+            ))}
+            </tbody>
+          </table>
+        </div>
+        {config && <SaveButton config={config}/>}
+      </React.Fragment>
     );
   }
 }

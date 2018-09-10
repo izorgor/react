@@ -7,18 +7,18 @@ class Block extends Component {
     this.state = {};
   }
 
-  handleChange = (inputName) => {
-  };
+
 
   render () {
-    const {template, variations} = this.props;
+    const {template, variations, onChange} = this.props;
+
     return (
       <React.Fragment>
         <tr className="post-table">
           <td><h2 className="templateName">{template}</h2></td>
           <td>
             {variations.map((variation, i) => (
-              <Input key={i} labelName={variation} templateName={template} onChange={this.handleChange}/>
+              <Input key={i} labelName={variation} templateName={template} onChange={onChange} />
             ))}
           </td>
         </tr>
