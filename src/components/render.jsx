@@ -50,7 +50,7 @@ class Render extends Component {
 
     let config = this.state.config;
 
-    config[template].filter(c => c.name === layout)[0].probability = e.target.value;
+    config[template].filter(c => c.name === layout)[0].probability = e.target.value / 100;
     config[template].filter(c => c.name === layout)[0].active = active;
 
     this.setState({config});

@@ -9,9 +9,12 @@ router.post('/', (req, res) => {
   fs.writeFile('./temp/test.json', JSON.stringify(req.body.configData), function (err) {
     if (err) throw err;
     console.log('Saved!');
-    res.send('Done!!!');
   });
 
+
+
 });
+
+
 
 module.exports = router;

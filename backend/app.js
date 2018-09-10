@@ -18,11 +18,6 @@ var allowCrossDomain = function (req, res, next) {
 
 app.use(allowCrossDomain);
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function (req, res) {
-  res.send('hello world');
-});
-
 app.use('/configUploader', configUploader);
 
 var server = app.listen(process.env.PORT || '3001', function () {
