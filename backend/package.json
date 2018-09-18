@@ -9,9 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
-  },
-  "devDependencies": {
+    "express": "^4.16.3",
     "body-parser": "^1.18.3",
     "s3": "^4.4.0"
   }

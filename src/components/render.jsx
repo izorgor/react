@@ -1,77 +1,92 @@
+//TODO: Implement Search box
+//TODO: Implement fields validation: 1. field can`t be empty if active
+
 import React, { Component } from 'react';
-import Block from './block';
+import Block from './renderTemplate';
 import SaveButton from './saveButton';
+import Header from './header';
 
 class Render extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {data: null};
+  }
+
   loadData () {
-    fetch('https://api.myjson.com/bins/6dr38')
+    fetch('https://api.myjson.com/bins/17udec')
       .then(response => response.json())
       .then(data => {
         this.setState({data: data});
-        this.setState({config: this.handleInitialConfigState()});
       })
       .catch(err => console.error(this.props.url, err.toString()));
   }
 
-  constructor (props) {
-    super(props);
-    this.state = {data: null};
+  removeByKey (myObj, deleteKey) {
+    return Object.keys(myObj)
+      .filter(key => key !== deleteKey)
+      .reduce((result, current) => {
+        result[current] = myObj[current];
+        return result;
+      }, {});
   }
 
   componentDidMount () {
     this.loadData();
   }
 
-  handleInitialConfigState () {
-    var config = {};
-    {
-      this.state.data && this.state.data.templates.map((template, i) => {
-        config[template.name] = [];
-
-        {
-          template.layouts.map((t, i) => {
-            config[template.name][i] = {
-              name: t,
-              active: false,
-              probability: 0
-            };
-          });
-        }
-
-      });
-    }
-    return config;
-  }
-
   handleChange = (e, inputConf) => {
-    const template = inputConf.template;
-    const layout = inputConf.layout;
-    const active = inputConf.active;
+    let {data} = this.state;
+    const {template, layout, active} = inputConf;
 
-    let config = this.state.config;
+    data[template].filter(c => c.name === layout)[0].probability = e.target.value;
+    data[template].filter(c => c.name === layout)[0].active = active;
 
-    config[template].filter(c => c.name === layout)[0].probability = e.target.value / 100;
-    config[template].filter(c => c.name === layout)[0].active = active;
+    this.setState({data});
+  };
 
-    this.setState({config});
+  handleAddTemplate = (createInfo) => {
+    const {websiteName, variations} = createInfo;
+    const a = this.state.data;
+    const newValue = variations.map(variation => (
+      {
+        name: variation,
+        active: true,
+        probability: 0
+      }
+    ));
+
+    this.setState({data: {...a, [websiteName]: newValue}});
+  };
+
+  handleRemoveTemplate = (name) => {
+    const template = this.removeByKey(this.state.data, name);
+    this.setState({data: template});
+  };
+
+  handleRemoveVariation = (name) => {
+    const template = this.state.data[name.tempName].filter(v => v.name !== name.varName);
+    this.setState({data: {...this.state.data, [name.tempName]: template}});
   };
 
   render () {
-
-    const {data, config} = this.state;
-
+    const {data} = this.state;
+    console.log(this.state);
     return (
       <React.Fragment>
-        <div className="table-responsive">
-          <table className="table table-striped">
-            <tbody>
-            {data && data.templates.map((template, i) => (
-              <Block key={i} template={template.name} variations={template.layouts} onChange={this.handleChange}/>
-            ))}
-            </tbody>
-          </table>
+        <Header handleAddTemplate={this.handleAddTemplate}/>
+        <div className="container">
+          <div className="table-responsive">
+            <table className="table table-striped">
+              <tbody>
+              {data && Object.keys(data).map((t, i) => (
+                <Block key={i} config={data} template={t} onChange={this.handleChange} onDelete={this.handleRemoveTemplate} onVarDelete={this.handleRemoveVariation}/>
+              ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-        {config && <SaveButton config={config}/>}
+
+        {data && <SaveButton data={data}/>}
       </React.Fragment>
     );
   }

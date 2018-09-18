@@ -4,6 +4,15 @@ body, html, .App, #root {
     height: 100%;
 }
 
+body .btn:hover {
+    opacity: 0.9;
+}
+
+body .btn:focus, .btn.focus {
+    box-shadow: none;
+    outline: 0;
+}
+
 .App {
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
@@ -58,6 +67,7 @@ nav h1 {
     text-shadow: 3px 4px 0px #000;
     letter-spacing: -2px;
     font-weight: 700;
+    margin: auto;
 }
 
 .templateName {
@@ -73,9 +83,13 @@ body .form-control:focus {
     border-color: #FF0050;
 }
 
-body .form-control {
-    width: 70px;
-    padding: 3px 10px;
+body .popupName{
+    width: 100%;
+}
+
+.post-table .form-control {
+    width: 80px;
+    padding: 3px 20px 3px 10px;
 }
 
 body .form-group label {
@@ -84,6 +98,35 @@ body .form-group label {
 
 body .form-group {
     float: left;
+
+}
+
+
+.post-table label{
+    display: block;
+    float: left;
+    clear: both;
+}
+.valuePadding input{
+    padding-right: 20px;
+}
+.valuePadding {
+    position: relative;
+    display: inline-block;
+    float: left;
+    clear: both;
+}
+
+.valuePadding::after {
+    content: '%';
+    position: absolute;
+    top:50%;
+    right: 5px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
 
 }
 
@@ -169,6 +212,22 @@ body .table td {
 
 }
 
+#addBlock img {
+    width: 20px;
+}
+
+#addBlock {
+    text-align: center;
+    padding: 15px 40px;
+    width: 200px;
+    position: absolute;
+    right: 15px;
+}
+
+#addBlock span {
+    margin-right: 10px;
+}
+
 .lds-ripple div {
     position: absolute;
     border: 4px solid #fff;
@@ -209,7 +268,9 @@ body .table td {
 }
 
 /* Hide default HTML checkbox */
-.switch input {display:none;}
+.switch input {
+    display: none;
+}
 
 /* The slider */
 .slider {
@@ -257,4 +318,26 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+/*POPUP*/
+
+body .modal {
+    display: block;
+}
+
+body .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    color: black;
+    padding: 0 20px;
+}
+
+body .modal-header {
+    display: block;
+}
+
+.variationInput {
+    display: block;
 }
